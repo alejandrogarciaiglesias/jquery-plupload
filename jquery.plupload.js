@@ -41,6 +41,11 @@
   Plupload.prototype.bindEvents = function () {
     var that = this;
 
+    this.$el.on('click mouseenter', function (event) {
+      that.uploader.refresh(); // Fixes fallback positioning on IE on mouseenter on the element. This can fix for when the upload button whas previously hidden.
+      event.preventDefault(); // Fixes triggering form submit when clicking on the element in Opera.
+    });
+
     // File(s) selected event. Start upload.
     this.uploader.bind('FilesAdded', function (uploader) {
       uploader.start();
